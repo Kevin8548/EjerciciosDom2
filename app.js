@@ -45,6 +45,7 @@ $form.addEventListener('submit', (e) => {
     inputTitulo.value = '';
 });
 
+//Eliminar tarea
 lista.addEventListener('click', (e) => {
     const btn = e.target.closest('[data-action="del');
     if (!btn) return;
@@ -52,5 +53,16 @@ lista.addEventListener('click', (e) => {
     const card = btn.closest('.card');
     if(card){
         card.remove();
+    }
+});
+
+//Marcar tarea como completa
+lista.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-action="done');
+    if (!btn) return;
+
+    const card = btn.closest('.card');
+    if(card){
+        card.classList.toggle('is-done');
     }
 });
