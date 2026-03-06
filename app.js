@@ -44,6 +44,8 @@ $form.addEventListener('submit', (e) => {
     const tarea = crearTarea(titulo, tag);
     lista.appendChild(tarea);
     inputTitulo.value = '';
+
+    actualizarStats();
 });
 
 //Eliminar tarea
@@ -54,6 +56,8 @@ lista.addEventListener('click', (e) => {
     const card = btn.closest('.card');
     if(card){
         card.remove();
+
+        actualizarStats();
     }
 });
 
@@ -65,6 +69,8 @@ lista.addEventListener('click', (e) => {
     const card = btn.closest('.card');
     if(card){
         card.classList.toggle('is-done');
+
+        actualizarStats();
     }
 });
 
@@ -84,6 +90,7 @@ lista.addEventListener('click', (e) => {
 
         lista.prepend(card);
     }
+    actualizarStats();
 });
 
 //Filtrar tareas
@@ -109,6 +116,7 @@ chips.forEach((chip) => {
             else {
                 card.style.display = tag === filtro ? '' : 'none';
             }
+            actualizarStats();
         });
     });
 });
@@ -128,10 +136,34 @@ inputBuscar.addEventListener('input', () => {
         } else {
             card.style.display = 'none';
         }
+        actualizarStats();
     });
 });
 
+//Limpiar busqueda
 btnLimpiarBuscar.addEventListener('click', () => {
     inputBuscar.value = '';
     inputBuscar.dispatchEvent(new Event('input'));
+
+    actualizarStats();
 });
+
+//Actualizar estadisticas
+const actualizarStats = () => {
+    const cards = $$('.card');
+    const total = cards.length;
+    const visibles = cards.filter(card => card.style.display !== 'none').length;
+    const favs = cards.filter(card => card.dataset.fav === '1').length;
+
+    statTotal.textContent = total;
+    statVisibles.textContent = visibles;
+    statFavs.textContent = favs;
+
+    //estado vacío
+    if(visibles === 0){
+        emptyState.classList.remove('is-hidden');
+    }else{
+        emptyState.classList.add('is-hidden');
+    }
+
+};
