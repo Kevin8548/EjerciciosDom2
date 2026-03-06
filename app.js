@@ -133,11 +133,5 @@ inputBuscar.addEventListener('input', () => {
 
 btnLimpiarBuscar.addEventListener('click', () => {
     inputBuscar.value = '';
-    state.q = '';
-
-    const cards = $$('.card');
-
-    cards.forEach(card => {
-        card.style.display = '';
-    });
+    inputBuscar.dispatchEvent(new Event('input'));
 });
