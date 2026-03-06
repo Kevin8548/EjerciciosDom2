@@ -66,3 +66,21 @@ lista.addEventListener('click', (e) => {
         card.classList.toggle('is-done');
     }
 });
+
+//Marcar tarea como favorita
+lista.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-action="fav"]');
+    if (!btn) return;
+
+    const card = btn.closest('.card');
+
+    if(card.dataset.fav === '1'){
+        card.dataset.fav = '0';
+        btn.textContent = '☆';
+    }else{
+        card.dataset.fav = '1';
+        btn.textContent = '★';
+
+        lista.prepend(card);
+    }
+});
