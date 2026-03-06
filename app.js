@@ -44,3 +44,13 @@ $form.addEventListener('submit', (e) => {
     lista.appendChild(tarea);
     inputTitulo.value = '';
 });
+
+lista.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-action="del');
+    if (!btn) return;
+
+    const card = btn.closest('.card');
+    if(card){
+        card.remove();
+    }
+});
