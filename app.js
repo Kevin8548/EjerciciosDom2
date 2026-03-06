@@ -84,3 +84,30 @@ lista.addEventListener('click', (e) => {
         lista.prepend(card);
     }
 });
+
+//Filtrar tareas
+const chips = document.querySelectorAll('.chip');
+chips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+        const filtro = chip.dataset.filter;
+        chips.forEach(c => c.classList.remove('is-active'));
+        chip.classList.add('is-active');
+
+        const cards = document.querySelectorAll('.card');
+
+        cards.forEach(card => {
+            const tag = card.dataset.tag;
+            const fav = card.dataset.fav;
+
+            if (filtro === 'all') {
+                card.style.display = '';
+            }
+            else if (filtro === 'fav') {
+                card.style.display = fav === '1' ? '' : 'none';
+            }
+            else {
+                card.style.display = tag === filtro ? '' : 'none';
+            }
+        });
+    });
+});
