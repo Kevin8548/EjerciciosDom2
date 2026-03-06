@@ -2,6 +2,7 @@
 
 //Utilidades
 const $ = (sel) => document.querySelector(sel);
+const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 
 //Variables
 const $form = $('#formTarea');
@@ -109,5 +110,34 @@ chips.forEach((chip) => {
                 card.style.display = tag === filtro ? '' : 'none';
             }
         });
+    });
+});
+
+//Buscar por texto
+inputBuscar.addEventListener('input', () => {
+    console.log('escribiendo...');
+    const texto = inputBuscar.value.toLowerCase();
+    const cards = $$('.card');
+
+    cards.forEach(card => {
+
+        const titulo = card.querySelector('.card__title').textContent.toLowerCase();
+
+        if(titulo.includes(texto)){
+            card.style.display = '';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+});
+
+btnLimpiarBuscar.addEventListener('click', () => {
+    inputBuscar.value = '';
+    state.q = '';
+
+    const cards = $$('.card');
+
+    cards.forEach(card => {
+        card.style.display = '';
     });
 });
