@@ -159,11 +159,13 @@ const actualizarStats = () => {
     statVisibles.textContent = visibles;
     statFavs.textContent = favs;
 
+
     //estado vacío
     if(visibles === 0){
         emptyState.classList.remove('is-hidden');
     }else{
         emptyState.classList.add('is-hidden');
-    }
-
+        }
 };
+
+actualizarStats();
